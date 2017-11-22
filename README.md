@@ -1,4 +1,4 @@
-# OOP2 Programmierprojekt I3a HS17
+﻿# OOP2 Programmierprojekt I3a HS17
 
 ## ElectricCarsFX
 
@@ -7,7 +7,7 @@ Implementieren Sie eine Applikation auf Basis JavaFX gemäss der Aufgabenbeschre
  - Die Verwendung von SceneBuilder und FXML ist nicht erlaubt.
 
 ## Bearbeitet von
- - Vorname Nachname
+ - Andreas Orler
 
 ## Abgabe
 - Freitag, 12.1.2018, 18:00 Uhr
