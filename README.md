@@ -7,7 +7,8 @@ Implementieren Sie eine Applikation auf Basis JavaFX gemäss der Aufgabenbeschre
  - Die Verwendung von SceneBuilder und FXML ist nicht erlaubt.
 
 ## Bearbeitet von
- - Andreas Orler
+ - Andreas Orler  Barish Demirci BarGraph von anderer Klasse implementiert
+
 
 ## Abgabe
 - Freitag, 12.1.2018, 18:00 Uhr
