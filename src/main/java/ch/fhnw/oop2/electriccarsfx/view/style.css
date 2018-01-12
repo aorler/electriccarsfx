@@ -1,3 +1,10 @@
 .root {
     -fx-padding: 20px;
 }
+.header {
+    -fx-font-size: 30;
+    -fx-background-color: #D3D3D3;
+    -fx-padding: 40 20 30 20;
+    -fx-spacing: 20;
+    -fx-effect: innershadow(two-pass-box, black, 10, 0, 0, 0);
+}

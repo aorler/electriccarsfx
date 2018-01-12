@@ -13,12 +13,14 @@ public class ElectricCarsApp extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		PresentationModel pm = new PresentationModel();
-		Parent rootPanel     = new ApplicationUI(pm);
 
+		Parent rootPanel = new ApplicationUI(pm);
 		Scene scene = new Scene(rootPanel);
 
 		primaryStage.titleProperty().bind(pm.applicationTitleProperty());
 		primaryStage.setScene(scene);
+		primaryStage.setWidth(1300);
+		primaryStage.setHeight(800);
 
 		primaryStage.show();
 	}

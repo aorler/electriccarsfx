@@ -1,5 +1,5 @@
 ID;MANUFACTURER;MODEL;SEATS;VEHICLE_CLASS;PRICE;WEIGHT;NOMINAL_RANGE_KM;TOP_SPEED_KM_H;PEAK_POWER_KW;PEAK_POWER_HP;ACCELERATION_S;CONSUMPTION_KWH;CHARGING_TIME_STANDARD_H;CHARGING_TIME_ROTARY_CURRENT_H;BATTERY_CAPACITY_KWH;PRODUCTION;PRODUCTION_YEAR;IMAGE_URL
-216266885312862;Renault;Twizy;1;Leichtfahrzeug;-1;-1.0;80.0;80.0;8.83;12.0;9.0;-1.0;3.5;;6.1;3300;2013;https://www.cdn.renault.com/content/dam/Renault/DE/personal-cars/twizy/m09e-twizy/m09e-phase1/00080465.JPG.ximg.l_full_m.smart.jpg
+216266885312862;Renault;Twizy;1;Leichtfahrzeug;-1;-1.0;80.0;80.0;8.83;12.0;9.0;-1.0;3.5;;6.1;3300;2013;https://www.cdn.renault.com/content/dam/Renault/DE/personal-car/twizy/m09e-twizy/m09e-phase1/00080465.JPG.ximg.l_full_m.smart.jpg
 216266886718139;BMW;i3;4;Kleinwagen;-1;-1.0;190.0;150.0;125.0;170.0;7.2;12.9;6–8;3;18.8;25500;2016;http://static1.businessinsider.com/image/59a48efe6eac400d4a8b4747-1778/p90273590highres.jpg
 216266886854995;BMW;i3 (seit Sommer 2016);4;Kleinwagen;-1;-1.0;300.0;150.0;125.0;170.0;7.2;12.9;6–8;3;28.0;25500;2016;http://st.automobilemag.com/uploads/sites/5/2016/11/2017-BMW-i3-with-i8-Supercar.jpg
 216266886973380;Chery;eQ1 EV;4;Kleinwagen;-1;-1.0;200.0;100.0;41.9;57.0;-1.0;-1.0;8–10;1.50;22.0;-1;-1;https://i0.wp.com/www.carnewschina.com/wp-content/uploads/2017/03/chery-eq1-1.jpg?ssl=1
