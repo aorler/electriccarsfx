@@ -1,0 +1,60 @@
+
+.barGraph{
+    -fx-background-color: linear-gradient(to right, rgba(9, 90, 78, 0.25), rgba(37, 128, 128, 0.23), rgba(22, 173, 166, 0.22));
+}
+
+.circle{
+    -fx-fill: #698187;
+}
+
+.label{
+    -fx-pref-width: 20px;
+    -fx-font-size: 5px;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-padding: 4 0 0 0;
+    -fx-text-fill: white;
+}
+
+.wertLabel {
+    -fx-pref-width: 20px;
+    -fx-background-color: #7babaa;
+}
+
+.durchLabel{
+    -fx-pref-width: 20px;
+    -fx-background-color: #5664a9;
+}
+
+.minmaxLabel{
+    -fx-pref-width: 20px;
+    -fx-font-size: 8px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-text-fill: white;
+}
+
+.valueLabel{
+    -fx-background-color: #806c12;
+    -fx-opacity: 0.6;
+}
+
+.averageBar{
+    -fx-fill: #5664a9;
+}
+
+.actualBar {
+    -fx-fill: #7babaa;
+    -fx-effect: dropshadow(gaussian, dimgrey, 0.5, 8, -1, 0);
+}
+
+.separator {
+    -fx-text-fill: red;
+}
+
+.hitMax{
+    -fx-effect: dropshadow(gaussian, rgba(189, 49, 56, 0.73), 0.5, 8, -1, 0);
+    -fx-opacity: 0.8;
+}
+

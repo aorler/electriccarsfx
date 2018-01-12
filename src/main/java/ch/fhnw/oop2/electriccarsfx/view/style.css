@@ -12,21 +12,21 @@
 }
 
 .header-label-big {
-    -fx-font-size: 30pt;
+    -fx-font-size: 26pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
     -fx-padding: 2px 15px;
 }
 
 .header-label-medium {
-    -fx-font-size: 24pt;
+    -fx-font-size: 20pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
     -fx-padding: 2px 15px;
 }
 
 .header-label-small {
-    -fx-font-size: 13pt;
+    -fx-font-size: 10pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
     -fx-padding: 1px 15px

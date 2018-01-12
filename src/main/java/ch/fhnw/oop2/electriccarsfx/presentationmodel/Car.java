@@ -113,8 +113,6 @@ public class Car {
                 getImgUrl());
     }
 
-
-
     //Getters and Setters
     public Long getId() {
         return id.get();

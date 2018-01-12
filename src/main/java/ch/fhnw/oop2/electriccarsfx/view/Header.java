@@ -2,9 +2,12 @@ package ch.fhnw.oop2.electriccarsfx.view;
 
 import ch.fhnw.oop2.electriccarsfx.presentationmodel.Car;
 import ch.fhnw.oop2.electriccarsfx.presentationmodel.PresentationModel;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.util.StringConverter;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 
 public class Header extends VBox implements ViewMixin {
 
@@ -77,6 +80,24 @@ public class Header extends VBox implements ViewMixin {
                 maxDistance.textProperty().bind(newSelection.kmRangeProperty().asString("%.2f km"));
                 maxSpeed.textProperty().bind(newSelection.topSpeedProperty().asString("%.2f km/h"));
                 price.textProperty().bind(newSelection.priceProperty().asString("%.2f CHF"));
+
+                final String url = newSelection.imgUrlProperty().get();
+
+                //async image loading
+                Image image = new Image(url, true);
+
+                image.progressProperty().addListener((observable1, oldValue1, newValue1) -> {
+                    double progress = Math.rint(newValue1.doubleValue() * 100);
+
+                    if(progress == 100) {
+                        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);
+                        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+                        Background background = new Background(backgroundImage);
+                        setBackground(background);
+                    }
+                });
+
+                setBackground(null);
             }
         });
 

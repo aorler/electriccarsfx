@@ -66,7 +66,6 @@ public class Editor extends GridPane implements ViewMixin {
     @Override
     public void initializeControls() {
 
-        //TODO: add missing labels
         manufacturer = new Label("Hersteller");
         seats = new Label("Sitze");
         price = new Label("Preis CHF");
