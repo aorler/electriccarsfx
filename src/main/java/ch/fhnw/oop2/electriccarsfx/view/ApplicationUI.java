@@ -1,12 +1,10 @@
 package ch.fhnw.oop2.electriccarsfx.view;
 
 import ch.fhnw.oop2.electriccarsfx.presentationmodel.Car;
-import javafx.event.EventHandler;
-import javafx.scene.control.SplitPane;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-
 import ch.fhnw.oop2.electriccarsfx.presentationmodel.PresentationModel;
+import javafx.application.Platform;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.BorderPane;
 
 public class ApplicationUI extends BorderPane implements ViewMixin {
     private final PresentationModel model;
@@ -46,18 +44,41 @@ public class ApplicationUI extends BorderPane implements ViewMixin {
     @Override
     public void setupEventHandlers() {
 
+        buttonBar.getDeleteButton().setOnMouseClicked(event -> {
+            Car selectedItem = (Car)listView.getSelectionModel().getSelectedItem();
+
+            if(selectedItem != null) {
+                model.removeCar(selectedItem);
+            }
+
+        });
+
+        buttonBar.getSaveButton().setOnMouseClicked(event -> {
+            model.save();
+        });
+
+        buttonBar.getNewButton().setOnMouseClicked(event -> {
+            //create new id
+            long biggestId = -1;
+            for (Car car : model.getAllCars()) {
+                if (car.getId() > biggestId)
+                    biggestId = car.getId();
+            }
+
+            model.addCar(new Car(biggestId + 1));
+
+            Platform.runLater(() -> {
+                listView.scrollTo(model.getLastCar());
+                listView.getSelectionModel().select(model.getLastCar());
+                listView.requestFocus();
+            });
+
+        });
     }
 
     @Override
     public void setupValueChangedListeners() {
-//        listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> model.setSelectedCarId(newValue));
-//        model.selectedCarIdProperty().addListener((observable, oldValue, newValue) -> {
-//            if (newValue.longValue() == model.newestCarIdProperty().getValue()) {
-//                listView.scrollTo(model.getCars(newValue.longValue()));
-//                listView.getSelectionModel().select(model.getCars(newValue.longValue()));
-//                listView.requestFocus();
-//            }
-//        });
+
     }
 
     @Override
@@ -71,8 +92,4 @@ public class ApplicationUI extends BorderPane implements ViewMixin {
                 });
     }
 
-    @Override
-    public void addStylesheetFiles(String... stylesheetFile) {
-
-    }
 }

@@ -1,7 +1,10 @@
 package ch.fhnw.oop2.electriccarsfx.view;
 
+import ch.fhnw.oop2.electriccarsfx.presentationmodel.Car;
 import ch.fhnw.oop2.electriccarsfx.presentationmodel.PresentationModel;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
 public class ButtonBar extends HBox implements ViewMixin {
@@ -11,10 +14,10 @@ public class ButtonBar extends HBox implements ViewMixin {
     private Button newButton;
     private Button deleteButton;
 
-   public ButtonBar(PresentationModel mode1){
-       this.model = mode1;
-       init();
-   }
+    public ButtonBar(PresentationModel mode1) {
+        this.model = mode1;
+        init();
+    }
 
 
     @Override
@@ -33,8 +36,17 @@ public class ButtonBar extends HBox implements ViewMixin {
     @Override
     public void setupEventHandlers() {
 
-
     }
 
+    public Button getSaveButton() {
+        return saveButton;
+    }
 
+    public Button getNewButton() {
+        return newButton;
+    }
+
+    public Button getDeleteButton() {
+        return deleteButton;
+    }
 }

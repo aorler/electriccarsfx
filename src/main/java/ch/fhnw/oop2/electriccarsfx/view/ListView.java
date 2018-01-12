@@ -1,6 +1,7 @@
 package ch.fhnw.oop2.electriccarsfx.view;
 
 import ch.fhnw.oop2.electriccarsfx.presentationmodel.Car;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -11,6 +12,15 @@ public class ListView extends TableView implements ViewMixin{
     public ListView(ObservableList<Car> items) {
         this.items = items;
         init();
+
+        if(items.size() > 0) {
+            //preselect first entry
+            Platform.runLater(() -> {
+                requestFocus();
+                getSelectionModel().select(0);
+                getFocusModel().focus(0);
+            });
+        }
     }
 
     @Override

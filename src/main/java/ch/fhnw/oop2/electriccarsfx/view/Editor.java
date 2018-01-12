@@ -2,10 +2,13 @@ package ch.fhnw.oop2.electriccarsfx.view;
 
 import ch.fhnw.oop2.electriccarsfx.presentationmodel.Car;
 import ch.fhnw.oop2.electriccarsfx.presentationmodel.PresentationModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
+import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.NumberStringConverter;
 
 public class Editor extends GridPane implements ViewMixin {
@@ -50,13 +53,10 @@ public class Editor extends GridPane implements ViewMixin {
     private TextField consumptionTxtField;
     private TextField prodYearTxtField;
 
-
-
     public Editor(PresentationModel model) {
         this.model = model;
         init();
     }
-
 
     @Override
     public void initializeSelf() {
@@ -66,24 +66,25 @@ public class Editor extends GridPane implements ViewMixin {
     @Override
     public void initializeControls() {
 
+        //TODO: add missing labels
         manufacturer = new Label("Hersteller");
         seats = new Label("Sitze");
         price = new Label("Preis CHF");
         kmRange = new Label("Reichweite");
-        kwPower = new Label();
-        acceleration = new Label();
-        chargingTime = new Label();
-        chargingRotary = new Label();
-        batteryCapacity = new Label();
-        production = new Label();
-        img = new Label();
-        carModel = new Label();
-        vehClass = new Label();
-        wight = new Label();
-        topSpeed = new Label();
-        horsePower = new Label();
-        consumption = new Label();
-        prodYear   = new Label();
+        kwPower = new Label("Spitzenleistung (KW)");
+        acceleration = new Label("Beschleunigung auf 100");
+        chargingTime = new Label("Ladezeit Standard (h)");
+        chargingRotary = new Label("Ladezeit Drehstrom(h)");
+        batteryCapacity = new Label("Kapazität Batterie(kwh)");
+        production = new Label("jährliche Produktion");
+        img = new Label("Bild");
+        carModel = new Label("Modell");
+        vehClass = new Label("Fahrzeugklasse");
+        wight = new Label("Gewicht");
+        topSpeed = new Label("Höchstegeschwindigkeit");
+        horsePower = new Label("Spitzenleistung(PS)");
+        consumption = new Label("Verbrauch");
+        prodYear = new Label("Produktionsjahr");
 
         manufacturerTxtField = new TextField();
         seatsTxtField = new TextField();
@@ -104,6 +105,9 @@ public class Editor extends GridPane implements ViewMixin {
         consumptionTxtField = new TextField();
         prodYearTxtField = new TextField();
 
+        //TODO: add custom css style
+        //set styles9
+        //manufacturer.getStyleClass().add("editor-label-small");
     }
 
     @Override
@@ -122,19 +126,18 @@ public class Editor extends GridPane implements ViewMixin {
         rc.setVgrow(Priority.ALWAYS);
         getRowConstraints().addAll(rc, rc, rc, rc, rc, rc, rc, rc, rc, rc);
 
-        setColumnSpan(imgTxtField,3);
+        setColumnSpan(imgTxtField, 3);
 
-        addRow(0,manufacturer,manufacturerTxtField,carModel,carModelTxtField);
-        addRow(1,seats,seatsTxtField,vehClass,vehClassTxtField);
-        addRow(2,price,priceTxtField,wight,wightTxtField);
-        addRow(3,kmRange,kmRangeTxtField,topSpeed,topSpeedTxtField);
-        addRow(4,kwPower,kwPowerTxtField,horsePower,horsePowerTxtField);
-        addRow(5,acceleration,accelerationTxtField,consumption,consumptionTxtField);
-        addRow(6,chargingTime,chargingTimeTxtField,chargingRotary,chargingRotaryTxtField);
-        addRow(7,batteryCapacity,batteryCapacityTxtField);
-        addRow(8,production,productionTxtField,prodYear,prodYearTxtField);
-        addRow(9,img,imgTxtField);
-
+        addRow(0, manufacturer, manufacturerTxtField, carModel, carModelTxtField);
+        addRow(1, seats, seatsTxtField, vehClass, vehClassTxtField);
+        addRow(2, price, priceTxtField, wight, wightTxtField);
+        addRow(3, kmRange, kmRangeTxtField, topSpeed, topSpeedTxtField);
+        addRow(4, kwPower, kwPowerTxtField, horsePower, horsePowerTxtField);
+        addRow(5, acceleration, accelerationTxtField, consumption, consumptionTxtField);
+        addRow(6, chargingTime, chargingTimeTxtField, chargingRotary, chargingRotaryTxtField);
+        addRow(7, batteryCapacity, batteryCapacityTxtField);
+        addRow(8, production, productionTxtField, prodYear, prodYearTxtField);
+        addRow(9, img, imgTxtField);
     }
 
     @Override
@@ -144,10 +147,12 @@ public class Editor extends GridPane implements ViewMixin {
 
     @Override
     public void setupValueChangedListeners() {
-        model.selectedCarIdProperty().addListener(((observable, oldValue, newValue) -> {
-            Car oldSelection = model.getCars(oldValue.longValue());
-            Car newSelection = model.getCars(newValue.longValue());
 
+        model.getSelectedCarIdProperty().addListener(((observable, oldValue, newValue) -> {
+            Car oldSelection = model.getCar(oldValue.longValue());
+            Car newSelection = model.getCar(newValue.longValue());
+
+            //unbind old selection
             if (oldSelection != null) {
                 manufacturerTxtField.textProperty().unbindBidirectional(oldSelection.manufacturerProperty());
                 seatsTxtField.textProperty().unbindBidirectional(oldSelection.seatsProperty());
@@ -168,32 +173,30 @@ public class Editor extends GridPane implements ViewMixin {
                 consumptionTxtField.textProperty().unbindBidirectional(oldSelection.consumpitonProperty());
                 prodYearTxtField.textProperty().unbindBidirectional(oldSelection.productionYearProperty());
             }
-//
-           if (newSelection != null) {
-               manufacturerTxtField.textProperty().bindBidirectional(newSelection.manufacturerProperty());
-               seatsTxtField.textProperty().bindBidirectional(newSelection.seatsProperty(), new NumberStringConverter());
-               priceTxtField.textProperty().bindBidirectional(newSelection.priceProperty(), new NumberStringConverter());
-               kmRangeTxtField.textProperty().bindBidirectional(newSelection.kmRangeProperty(), new NumberStringConverter());
-               kwPowerTxtField.textProperty().bindBidirectional(newSelection.peakPowerKwProperty(), new NumberStringConverter());
-               accelerationTxtField.textProperty().bindBidirectional(newSelection.accelerationProperty(), new NumberStringConverter());
-               chargingTimeTxtField.textProperty().bindBidirectional(newSelection.standardChargingTimeProperty());
-               chargingRotaryTxtField.textProperty().bindBidirectional(newSelection.chargingTimeRotaryProperty());
-               batteryCapacityTxtField.textProperty().bindBidirectional(newSelection.battaryCapacityProperty(), new NumberStringConverter());
-               productionTxtField.textProperty().bindBidirectional(newSelection.productionProperty(), new NumberStringConverter());
-               imgTxtField.textProperty().bindBidirectional(newSelection.imgUrlProperty());
-               carModelTxtField.textProperty().bindBidirectional(newSelection.modelProperty());
-               vehClassTxtField.textProperty().bindBidirectional(newSelection.vehicleClassProperty());
-               wightTxtField.textProperty().bindBidirectional(newSelection.wightProperty(), new NumberStringConverter());
-               topSpeedTxtField.textProperty().bindBidirectional(newSelection.topSpeedProperty(), new NumberStringConverter());
-               horsePowerTxtField.textProperty().bindBidirectional(newSelection.peakPowerHpProperty(), new NumberStringConverter());
-               consumptionTxtField.textProperty().bindBidirectional(newSelection.consumpitonProperty(), new NumberStringConverter());
-               prodYearTxtField.textProperty().bindBidirectional(newSelection.productionYearProperty(), new NumberStringConverter());
-           }
+
+            //bind new selection
+            if (newSelection != null) {
+                manufacturerTxtField.textProperty().bindBidirectional(newSelection.manufacturerProperty());
+                seatsTxtField.textProperty().bindBidirectional(newSelection.seatsProperty(), new NumberStringConverter());
+                priceTxtField.textProperty().bindBidirectional(newSelection.priceProperty(), new NumberStringConverter());
+                kmRangeTxtField.textProperty().bindBidirectional(newSelection.kmRangeProperty(), new NumberStringConverter());
+                kwPowerTxtField.textProperty().bindBidirectional(newSelection.peakPowerKwProperty(), new NumberStringConverter());
+                accelerationTxtField.textProperty().bindBidirectional(newSelection.accelerationProperty(), new NumberStringConverter());
+                chargingTimeTxtField.textProperty().bindBidirectional(newSelection.standardChargingTimeProperty());
+                chargingRotaryTxtField.textProperty().bindBidirectional(newSelection.chargingTimeRotaryProperty());
+                batteryCapacityTxtField.textProperty().bindBidirectional(newSelection.battaryCapacityProperty(), new NumberStringConverter());
+                productionTxtField.textProperty().bindBidirectional(newSelection.productionProperty(), new NumberStringConverter());
+                imgTxtField.textProperty().bindBidirectional(newSelection.imgUrlProperty());
+                carModelTxtField.textProperty().bindBidirectional(newSelection.modelProperty());
+                vehClassTxtField.textProperty().bindBidirectional(newSelection.vehicleClassProperty());
+                wightTxtField.textProperty().bindBidirectional(newSelection.wightProperty(), new NumberStringConverter());
+                topSpeedTxtField.textProperty().bindBidirectional(newSelection.topSpeedProperty(), new NumberStringConverter());
+                horsePowerTxtField.textProperty().bindBidirectional(newSelection.peakPowerHpProperty(), new NumberStringConverter());
+                consumptionTxtField.textProperty().bindBidirectional(newSelection.consumpitonProperty(), new NumberStringConverter());
+                prodYearTxtField.textProperty().bindBidirectional(newSelection.productionYearProperty(), new NumberStringConverter());
+            }
+
         }));
-
-
-
-
 
     }
 

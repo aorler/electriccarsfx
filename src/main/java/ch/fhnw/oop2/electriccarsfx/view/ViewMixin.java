@@ -4,7 +4,6 @@ import java.util.List;
 
 public interface ViewMixin {
 
-
     default void init() {
         initializeSelf();
         initializeControls();
@@ -31,9 +30,5 @@ public interface ViewMixin {
     }
 
     List<String> getStylesheets();
-
-
-
-
 
 }

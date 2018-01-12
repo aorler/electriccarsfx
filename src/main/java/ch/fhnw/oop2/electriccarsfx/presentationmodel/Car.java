@@ -29,6 +29,31 @@ public class Car {
     public static final String NO_VALUE_SET_STRING = "-1";
     public static final String NO_IMAGE_SET = "/icon/noimage.png";
 
+    public Car(long id) {
+        setId(id);
+
+        setManufacturer("");
+        setModel("");
+        setSeats("");
+        setVehicleClass("");
+        setPrice("");
+        setWight("");
+        setKmRange("");
+        setTopSpeed("");
+        setPeakPowerKw("");
+        setPeakPowerHp("");
+        setAcceleration("");
+        setConsumpiton("");
+        setStandardChargingTime("");
+        setChargingTimeRotary("");
+        setBattaryCapacity("");
+        setProduction("");
+        setProductionYear("");
+        setImgUrl("");
+
+        addPowerConverterBindings();
+    }
+
     public Car(String[] line){
         setId(line[0]);
         setManufacturer(line[1]);
@@ -49,9 +74,21 @@ public class Car {
         setProduction(line[16]);
         setProductionYear(line[17]);
         setImgUrl(line[18]);
+
+        addPowerConverterBindings();
     }
 
+    private void addPowerConverterBindings() {
+        peakPowerHpProperty().addListener((obv, oldValue1, newHpValue) -> {
 
+            peakPowerKwProperty().set((Double) newHpValue / KW_TO_HS);
+        });
+
+        peakPowerKwProperty().addListener((obv, oldValue1, newKwValue) -> {
+
+            peakPowerHpProperty().set((Double) newKwValue * KW_TO_HS);
+        });
+    }
 
     public String infoAsLine(String delimiter){
         return String.join(delimiter,
